@@ -12,7 +12,7 @@ public class SchedulerComponent {
 	@Autowired
 	RestTemplate restTemplate;
 
-	String url = "";
+	String url = "http://test-server:8080/users";
 
 	@Scheduled(fixedDelay = 3000)
 	public void callServerEnpoint() {
