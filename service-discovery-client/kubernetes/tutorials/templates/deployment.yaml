@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-client
+  labels:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-client
+  template:
+    metadata:
+      labels:
+        app: test-client
+    spec:
+      containers:
+        - name: test-client
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            limits:
+              cpu: 1
+              memory: 1024Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: stg
+            - name: SPRING_APPLICATION_JSON
+              valueFrom:
+                configMapKeyRef:
+                  name: test-client-config
+                  key: stg-config.json
+      imagePullSecrets:
+        - name: harbor

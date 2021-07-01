@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-client-config
+data:
+  dev-config.json:
+    '{
+         "datasource.url": "jdbc:mariadb://maxscale-rwsplit:3306/byob",
+         "datasource.username": "msa_stagging",
+         "datasource.password": "maxscale",
+         "auto-commit": true,           
+         "connection.timeout": 300,
+         "idle.timeout": 600000,
+         "max.lifetime": 1800000,
+         "maximum.pool.size": 50,
+         "minimum.idle": 15,
+         "hibernate.hbm2ddl.send.sms": "otp-mgmt-topic",
+         "hazelcast.cluster.ip.address" : "10.50.18.241:5701",
+         "kafka.topic.reporting.logs": "reporting-logs-topic",
+         "kafka.topic.send_sms.name": "send-sms-topic",
+         "cache.hazelcast.cluster.ip": "10.50.18.241:5701",
+         "fallback.time": 2000,
+         "logging.level.org.hibernate.SQL": "DEBUG",
+         "logging.level.org.hibernate.type.descriptor.sql.BasicBinder": "DEBUG",
+         "server.kafka.producer.bootstrap.servers": "10.50.18.241:32623",
+         "server.kafka.producer.key.serializer": "org.apache.kafka.common.serialization.StringSerializer",
+         "server.kafka.producer.value.serializer": "org.springframework.kafka.support.serializer.JsonSerializer",
+         "byob.subscriber.api": "https://apimtest.jazz.com.pk/nomitest/byob",
+         "byob.token.api": "https://apimtest.jazz.com.pk/token",
+         "cahce.manager.internal.service.base.url": "cache_manager:8080/load"
+       }'
+  stg-config.json:
+    '{
+       "datasource.url": "jdbc:mysql://maxscale-rwsplit/database_tutorial?autoReconnect=true&useUnicode=true&characterEncoding=utf8",
+       "datasource.username": "maxscale",
+       "datasource.password": "maxscale",
+       "connection.timeout": 300,
+       "idle.timeout": 600000,
+       "max.lifetime": 1800000,
+       "maximum.pool.size": 50,
+       "minimum.idle": 15,
+       "hibernate.hbm2ddl.send.sms": "send-sms-topic",
+       "hazelcast.cluster.ip.address" : "hazelcast-cluster.cache:5701",
+       "kafka.topic.reporting.logs": "reporting-logs-topic",
+       "kafka.topic.send_sms": "otp-mgmt-topic",
+       "cache.hazelcast.cluster.ip": "hazelcast-cluster.cache:5701",
+       "fallback.time": 2000,
+       "logging.level.org.hibernate.SQL": "DEBUG",
+       "logging.level.org.hibernate.type.descriptor.sql.BasicBinder": "DEBUG",
+       "server.kafka.producer.bootstrap.servers": "kafka.queue:9092",
+       "server.kafka.producer.key.serializer": "org.apache.kafka.common.serialization.StringSerializer",
+       "server.kafka.producer.value.serializer": "org.springframework.kafka.support.serializer.JsonSerializer",
+       "byob.subscriber.api": "https://apimtest.jazz.com.pk/nomitest/byob",
+       "byob.token.api": "https://apimtest.jazz.com.pk/token",
+       "cahce.manager.internal.service.base.url": "http://10-50-142-209.nip.io/cache_manager/load"
+     }'
