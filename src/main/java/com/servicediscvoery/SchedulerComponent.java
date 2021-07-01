@@ -1,13 +1,12 @@
 package com.servicediscvoery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-@Service
+@Component
 public class SchedulerComponent {
 
 	@Autowired
@@ -19,10 +18,5 @@ public class SchedulerComponent {
 	public void callServerEnpoint() {
 		ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 		System.out.println("Calling via service discovery -> " + response.getBody());
-	}
-
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
 	}
 }
