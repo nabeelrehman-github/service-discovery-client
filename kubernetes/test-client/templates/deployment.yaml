@@ -13,6 +13,7 @@ spec:
       labels:
         app: test-client
     spec:
+      automountServiceAccountToken: true
       containers:
         - name: test-client
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
